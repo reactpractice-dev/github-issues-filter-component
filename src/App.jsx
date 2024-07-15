@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <h1 className="text-3xl font-bold m-5">Github Issue filters</h1>
-      <div className="flex gap-4 m-5">
+      <div className="flex gap-10 m-5">
         <AuthorFilter />
         <LabelFilter />
         <MilestoneFilter />

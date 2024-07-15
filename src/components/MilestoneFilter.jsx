@@ -19,7 +19,7 @@ const MilestoneFilter = () => {
   }, []);
 
   // todo - render milestones
-  return <GithubFilter />;
+  return <GithubFilter name="Milestone" />;
 };
 
 export default MilestoneFilter;
