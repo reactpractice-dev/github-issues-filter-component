@@ -14,7 +14,7 @@ const GithubFilter = ({ name }) => {
           <FaAngleDown />
         </span>
       </button>
-      {isOpen ? <div>Open</div> : <div>Closed</div>}
+      {isOpen ? <div className="bg-white p-4">Open</div> : null}
     </div>
   );
 };
