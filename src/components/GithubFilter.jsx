@@ -1,14 +1,17 @@
 import { FaAngleDown } from "react-icons/fa6";
 import { useState } from "react";
-import { useFloating } from "@floating-ui/react";
+import { useFloating, offset, flip, shift } from "@floating-ui/react";
 
 const GithubFilter = ({ name, header, placeholder, items, renderItem }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { refs, floatingStyles } = useFloating();
+  const { refs, floatingStyles } = useFloating({
+    placement: "bottom-end",
+    middleware: [offset({ mainAxis: 5, crossAxis: 10 }), flip(), shift()],
+  });
   return (
     <div>
       <button
-        className="flex items-center gap-2"
+        className="flex items-center gap-1"
         onClick={() => setIsOpen(!isOpen)}
         ref={refs.setReference}
       >
@@ -21,7 +24,7 @@ const GithubFilter = ({ name, header, placeholder, items, renderItem }) => {
         <div
           ref={refs.setFloating}
           style={floatingStyles}
-          className="bg-white border border-gray-200 shadow-md text-xs w-64 flex flex-col"
+          className="bg-white border border-gray-200 shadow-md text-xs w-64 flex flex-col rounded-lg"
         >
           <div className="m-2 pl-1 font-semibold">{header}</div>
           <hr />
