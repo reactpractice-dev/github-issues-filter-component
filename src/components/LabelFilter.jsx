@@ -19,7 +19,15 @@ const LabelFilter = () => {
   }, []);
 
   // todo - render labels
-  return <GithubFilter name="Label" />;
+  return (
+    <GithubFilter
+      name="Label"
+      header="Filter by label"
+      placeholder="Filter labels"
+      items={labels}
+      renderItem={(label) => label.name}
+    />
+  );
 };
 
 export default LabelFilter;

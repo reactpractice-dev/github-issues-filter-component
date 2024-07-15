@@ -19,6 +19,14 @@ const AuthorFilter = () => {
   }, []);
 
   // todo - render authors
-  return <GithubFilter name="Author" />;
+  return (
+    <GithubFilter
+      name="Author"
+      header="Filter by author"
+      placeholder="Filter authors"
+      items={authors}
+      renderItem={(author) => author.login}
+    />
+  );
 };
 export default AuthorFilter;
