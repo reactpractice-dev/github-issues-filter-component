@@ -18,14 +18,22 @@ const AuthorFilter = () => {
     fetchAuthors();
   }, []);
 
-  // todo - render authors
   return (
     <GithubFilter
       name="Author"
       header="Filter by author"
       placeholder="Filter authors"
       items={authors}
-      renderItem={(author) => author.login}
+      renderItem={(author) => (
+        <div className="flex gap-2 items-center">
+          <img
+            src={author.avatar_url}
+            alt={author.login}
+            className="w-4 h-4 rounded-lg border border-gray-300"
+          />
+          {author.login}
+        </div>
+      )}
     />
   );
 };
