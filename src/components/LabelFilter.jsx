@@ -18,14 +18,21 @@ const LabelFilter = () => {
     fetchLabels();
   }, []);
 
-  // todo - render labels
   return (
     <GithubFilter
       name="Label"
       header="Filter by label"
       placeholder="Filter labels"
       items={labels}
-      renderItem={(label) => label.name}
+      renderItem={(label) => (
+        <div className="flex items-center gap-2">
+          <div
+            style={{ backgroundColor: `#${label.color}` }}
+            className="w-4 h-4 rounded-lg border border-gray-300"
+          ></div>
+          {label.name}
+        </div>
+      )}
     />
   );
 };
