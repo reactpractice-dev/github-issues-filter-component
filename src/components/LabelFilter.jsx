@@ -33,6 +33,7 @@ const LabelFilter = () => {
           {label.name}
         </div>
       )}
+      filterFn={(label, query) => label.name.match(new RegExp(query, "i"))}
     />
   );
 };

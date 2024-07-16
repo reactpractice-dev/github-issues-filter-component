@@ -10,7 +10,14 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 
-const GithubFilter = ({ name, header, placeholder, items, renderItem }) => {
+const GithubFilter = ({
+  name,
+  header,
+  placeholder,
+  items,
+  renderItem,
+  filterFn,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
@@ -18,12 +25,12 @@ const GithubFilter = ({ name, header, placeholder, items, renderItem }) => {
     placement: "bottom-end",
     middleware: [offset({ mainAxis: 5, crossAxis: 10 }), flip(), shift()],
   });
-
   const dismiss = useDismiss(context);
-
   // Merge all the interactions into prop getters
   const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
 
+  const [filterQuery, setFilterQuery] = useState("");
+  const filteredItems = items.filter((item) => filterFn(item, filterQuery));
   return (
     <div>
       <button
@@ -55,10 +62,12 @@ const GithubFilter = ({ name, header, placeholder, items, renderItem }) => {
             type="text"
             placeholder={placeholder}
             className="m-2 p-2 border border-gray-300 rounded-lg"
+            value={filterQuery}
+            onChange={(e) => setFilterQuery(e.target.value)}
           />
           <hr />
           <div className="overflow-auto h-64 flex flex-col">
-            {items.map((item) => (
+            {filteredItems.map((item) => (
               <a
                 key={item.id}
                 href="#"

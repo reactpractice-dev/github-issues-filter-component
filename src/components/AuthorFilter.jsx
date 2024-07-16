@@ -34,6 +34,7 @@ const AuthorFilter = () => {
           {author.login}
         </div>
       )}
+      filterFn={(author, query) => author.login.match(new RegExp(query, "i"))}
     />
   );
 };

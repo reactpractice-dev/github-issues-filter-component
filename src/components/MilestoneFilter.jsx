@@ -18,7 +18,6 @@ const MilestoneFilter = () => {
     fetchMilestones();
   }, []);
 
-  // todo - render milestones
   return (
     <GithubFilter
       name="Milestones"
@@ -26,6 +25,9 @@ const MilestoneFilter = () => {
       placeholder="Filter milestones"
       items={milestones}
       renderItem={(milestone) => milestone.title}
+      filterFn={(milestone, query) =>
+        milestone.title.match(new RegExp(query, "i"))
+      }
     />
   );
 };
