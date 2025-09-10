@@ -1,6 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { useFloating } from "@floating-ui/react";
+import { useFloating, useInteractions } from "@floating-ui/react";
+import { useDismiss } from "@floating-ui/react";
 
 type Props = {
   title: string;
@@ -8,7 +9,13 @@ type Props = {
 
 const GithubFilter: React.FC<Props> = ({ title }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { refs, floatingStyles } = useFloating();
+  const { refs, floatingStyles, context } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+  });
+  const dismiss = useDismiss(context);
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
   return (
     <>
       <button
@@ -17,12 +24,17 @@ const GithubFilter: React.FC<Props> = ({ title }) => {
         }`}
         onClick={() => setIsOpen(!isOpen)}
         ref={refs.setReference}
+        {...getReferenceProps()}
       >
         {title}
         <ChevronDown className="w-4 h-4" />
       </button>
       {isOpen && (
-        <div ref={refs.setFloating} style={floatingStyles}>
+        <div
+          ref={refs.setFloating}
+          style={floatingStyles}
+          {...getFloatingProps()}
+        >
           Tooltip
         </div>
       )}
