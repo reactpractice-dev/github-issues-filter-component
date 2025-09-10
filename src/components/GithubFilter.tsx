@@ -1,13 +1,15 @@
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useFloating, useInteractions } from "@floating-ui/react";
 import { useDismiss } from "@floating-ui/react";
 
-type Props = {
+type Props<T> = {
   title: string;
+  items?: T[];
+  renderItem: (item: T) => ReactNode;
 };
 
-const GithubFilter: React.FC<Props> = ({ title }) => {
+const GithubFilter = <T,>({ title, items = [], renderItem }: Props<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
@@ -35,7 +37,11 @@ const GithubFilter: React.FC<Props> = ({ title }) => {
           style={floatingStyles}
           {...getFloatingProps()}
         >
-          Tooltip
+          <ul>
+            {items.map((item) => (
+              <li>{renderItem(item)}</li>
+            ))}
+          </ul>
         </div>
       )}
     </>

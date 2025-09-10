@@ -19,8 +19,13 @@ const LabelFilter = () => {
 
   console.log("labels", labels);
 
-  // todo - render labels
-  return <GithubFilter title="Label" />;
+  return (
+    <GithubFilter
+      title="Label"
+      items={labels}
+      renderItem={(label) => label.name}
+    />
+  );
 };
 
 export default LabelFilter;
