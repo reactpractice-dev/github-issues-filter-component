@@ -21,5 +21,5 @@ When you're ready to check your work, check out [the official solution](https://
 - `npm install`
 - `npm run dev`
 
-Build the generic filter under `src/components/GithubFilter.jsx`.
+Build the generic filter under `src/components/GithubFilter.tsx`.
 Once you know what props are expected, update the `MilestoneFilter`, `LabelFilter` and `AuthorFilter` as well.
