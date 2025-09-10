@@ -20,6 +20,6 @@ const AuthorFilter = () => {
   console.log("authors", authors);
 
   // todo - render authors
-  return <GithubFilter />;
+  return <GithubFilter title="Author" />;
 };
 export default AuthorFilter;

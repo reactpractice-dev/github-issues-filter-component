@@ -20,7 +20,7 @@ const LabelFilter = () => {
   console.log("labels", labels);
 
   // todo - render labels
-  return <GithubFilter />;
+  return <GithubFilter title="Label" />;
 };
 
 export default LabelFilter;
