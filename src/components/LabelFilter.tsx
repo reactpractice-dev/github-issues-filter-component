@@ -17,13 +17,12 @@ const LabelFilter = () => {
     },
   });
 
-  console.log("labels", labels);
-
   return (
     <GithubFilter
       title="Label"
       items={labels}
       renderItem={(label) => label.name}
+      filterFn={(label, query) => new RegExp(query, "i").test(label.name)}
     />
   );
 };

@@ -7,10 +7,17 @@ type Props<T> = {
   title: string;
   items?: T[];
   renderItem: (item: T) => ReactNode;
+  filterFn: (item: T, filterText: string) => boolean;
 };
 
-const GithubFilter = <T,>({ title, items = [], renderItem }: Props<T>) => {
+const GithubFilter = <T,>({
+  title,
+  items = [],
+  renderItem,
+  filterFn,
+}: Props<T>) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [filterText, setFilterText] = useState("");
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
@@ -18,6 +25,12 @@ const GithubFilter = <T,>({ title, items = [], renderItem }: Props<T>) => {
   const dismiss = useDismiss(context);
 
   const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
+
+  const filteredItems =
+    filterText !== ""
+      ? items.filter((item) => filterFn(item, filterText))
+      : items;
+
   return (
     <>
       <button
@@ -37,8 +50,13 @@ const GithubFilter = <T,>({ title, items = [], renderItem }: Props<T>) => {
           style={floatingStyles}
           {...getFloatingProps()}
         >
+          <input
+            type="text"
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+          />
           <ul>
-            {items.map((item) => (
+            {filteredItems.map((item) => (
               <li>{renderItem(item)}</li>
             ))}
           </ul>

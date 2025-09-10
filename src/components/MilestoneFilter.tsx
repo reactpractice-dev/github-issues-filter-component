@@ -16,13 +16,15 @@ const MilestoneFilter = () => {
       return data;
     },
   });
-  console.log("milestones", milestones);
 
   return (
     <GithubFilter
       title="Milestones"
       items={milestones}
       renderItem={(milestone) => milestone.title}
+      filterFn={(milestone, query) =>
+        new RegExp(query, "i").test(milestone.title)
+      }
     />
   );
 };

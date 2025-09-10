@@ -17,13 +17,14 @@ const AuthorFilter = () => {
     },
   });
 
-  console.log("authors", authors);
-
   return (
     <GithubFilter
       title="Author"
       items={authors}
       renderItem={(author) => author.name}
+      filterFn={(author, query) =>
+        new RegExp(query, "i").test(author.name || "")
+      }
     />
   );
 };
